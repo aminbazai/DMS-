@@ -1,0 +1,79 @@
+{
+  "name": "dms-electron",
+  "version": "1.0.0",
+  "description": "Distribution Management System - SM Younas Traders",
+  "main": "src/main/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && cross-env NODE_ENV=development electron .\"",
+    "electron:build": "vite build && electron-builder"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "bcryptjs": "^2.4.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "react-hook-form": "^7.53.0",
+    "recharts": "^2.15.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "vite": "^6.0.3",
+    "wait-on": "^8.0.3"
+  },
+  "author": "Tech Solution Consultancy",
+  "build": {
+    "appId": "com.techsolution.dms",
+    "productName": "DMS - SM Younas Traders",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "src/main/**/*",
+      "resources/**/*",
+      "node_modules/better-sqlite3/**/*",
+      "node_modules/bcryptjs/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "resources/icon.ico",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DMS - SM Younas Traders",
+      "artifactName": "DMS-SM-Younas-Traders-Setup-${version}.exe",
+      "installerIcon": "resources/icon.ico",
+      "uninstallerIcon": "resources/icon.ico",
+      "installerHeaderIcon": "resources/icon.ico",
+      "runAfterFinish": true,
+      "include": "resources/installer-auth.nsh"
+    },
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**",
+      "node_modules/bcryptjs/**"
+    ],
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "resources"
+      }
+    ]
+  }
+}
